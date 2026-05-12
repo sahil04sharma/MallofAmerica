@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Mall of America — Interactive Commercial Sales Deck">
+  <defs>
+    <!-- Background atmosphere -->
+    <radialGradient id="atmos" cx="85%" cy="20%" r="80%">
+      <stop offset="0%" stop-color="#2a1f0a" stop-opacity="0.95"/>
+      <stop offset="45%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#050505"/>
+    </radialGradient>
+    <!-- Gilded text gradient -->
+    <linearGradient id="gilded" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0D58A"/>
+      <stop offset="50%" stop-color="#C9A84C"/>
+      <stop offset="100%" stop-color="#8B6914"/>
+    </linearGradient>
+    <!-- Gold gradient for CTA -->
+    <linearGradient id="ctaGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C9A84C"/>
+      <stop offset="100%" stop-color="#8B6914"/>
+    </linearGradient>
+    <!-- Vignette -->
+    <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+      <stop offset="50%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.55"/>
+    </radialGradient>
+    <!-- Live dot pulse -->
+    <radialGradient id="liveDot" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3CD56F"/>
+      <stop offset="100%" stop-color="#1f7a3f"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Layer 0 — base ink -->
+  <rect width="1200" height="630" fill="#050505"/>
+
+  <!-- Layer 1 — atmosphere wash (warm gold glow top-right) -->
+  <rect width="1200" height="630" fill="url(#atmos)"/>
+
+  <!-- Layer 2 — diagonal architectural light streaks (subtle texture) -->
+  <g opacity="0.05">
+    <path d="M 0 0 L 1200 -100 L 1400 250 L 200 350 Z" fill="#C9A84C"/>
+    <path d="M -100 400 L 800 350 L 900 700 L -100 750 Z" fill="#C9A84C"/>
+  </g>
+
+  <!-- Layer 3 — vignette -->
+  <rect width="1200" height="630" fill="url(#vignette)"/>
+
+  <!-- Layer 4 — hairline editorial frame -->
+  <rect x="28" y="28" width="1144" height="574" fill="none" stroke="#C9A84C" stroke-opacity="0.22" stroke-width="1"/>
+
+  <!-- ============================================================
+       TOP ROW · brand left · live chip right
+       ============================================================ -->
+
+  <!-- Brand mark (stylized M monogram) -->
+  <g transform="translate(80,80)">
+    <!-- Gold ring + M -->
+    <circle cx="22" cy="22" r="22" fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.5"/>
+    <text x="22" y="30" text-anchor="middle" font-family="Italiana, Georgia, serif" font-size="26" fill="url(#gilded)" font-weight="400">M</text>
+    <!-- Wordmark -->
+    <text x="62" y="29" font-family="Italiana, Georgia, serif" font-size="22" fill="#fff" letter-spacing="3.96">MALL OF AMERICA</text>
+  </g>
+
+  <!-- Live · Today chip (top-right) -->
+  <g transform="translate(770,72)">
+    <rect x="0" y="0" width="350" height="40" fill="#080808" fill-opacity="0.55" stroke="#C9A84C" stroke-opacity="0.28" stroke-width="1"/>
+    <!-- pulse ring -->
+    <circle cx="16" cy="20" r="9" fill="#3CD56F" fill-opacity="0.18"/>
+    <circle cx="16" cy="20" r="4" fill="url(#liveDot)"/>
+    <text x="32" y="24" font-family="DM Sans, system-ui, sans-serif" font-size="9" fill="#fff" fill-opacity="0.55" letter-spacing="2.88" font-weight="500">LIVE · TODAY</text>
+    <line x1="128" y1="13" x2="128" y2="27" stroke="#C9A84C" stroke-opacity="0.3" stroke-width="1"/>
+    <text x="138" y="26" font-family="Italiana, Georgia, serif" font-size="16" fill="#F0D58A" letter-spacing="0.64">47,283</text>
+    <text x="216" y="24" font-family="DM Sans, system-ui, sans-serif" font-size="9" fill="#fff" fill-opacity="0.45" letter-spacing="2.52" font-weight="500">GUESTS</text>
+  </g>
+
+  <!-- ============================================================
+       MIDDLE · kicker + HEADLINE + caption
+       ============================================================ -->
+
+  <!-- Kicker -->
+  <g transform="translate(80,225)">
+    <line x1="0" y1="0" x2="56" y2="0" stroke="#C9A84C" stroke-width="1"/>
+    <text x="70" y="4" font-family="DM Sans, system-ui, sans-serif" font-size="11" fill="#C9A84C" letter-spacing="3.52" font-weight="500">INTERACTIVE SALES DECK · BLOOMINGTON, MN</text>
+  </g>
+
+  <!-- HEADLINE -->
+  <g transform="translate(80,260)">
+    <text x="0" y="80" font-family="Bebas Neue, Impact, sans-serif" font-size="92" fill="#fff" letter-spacing="0.46" font-weight="400">WHERE AMERICA SHOPS,</text>
+    <text x="0" y="172" font-family="Bebas Neue, Impact, sans-serif" font-size="92" fill="#fff" letter-spacing="0.46" font-weight="400">
+      PLAYS, AND <tspan fill="url(#gilded)">GATHERS.</tspan>
+    </text>
+  </g>
+
+  <!-- Caption (editorial italic with gold rule) -->
+  <g transform="translate(80,460)">
+    <line x1="0" y1="0" x2="0" y2="48" stroke="#C9A84C" stroke-opacity="0.5" stroke-width="1"/>
+    <text x="18" y="20" font-family="Cormorant Garamond, Georgia, serif" font-size="20" font-style="italic" fill="#fff" fill-opacity="0.78" font-weight="300">The most visited destination in America.</text>
+    <text x="18" y="46" font-family="Cormorant Garamond, Georgia, serif" font-size="20" font-style="italic" fill="#fff" fill-opacity="0.78" font-weight="300">Forty million guests. One extraordinary address.</text>
+  </g>
+
+  <!-- ============================================================
+       BOTTOM · stats left · CTA right
+       ============================================================ -->
+
+  <!-- Stat row -->
+  <g transform="translate(80,540)">
+    <!-- 40M -->
+    <text x="0" y="32" font-family="Italiana, Georgia, serif" font-size="38" fill="#F0D58A" letter-spacing="0.76">40M</text>
+    <text x="0" y="55" font-family="DM Sans, system-ui, sans-serif" font-size="9" fill="#fff" fill-opacity="0.45" letter-spacing="2.88" font-weight="500">ANNUAL GUESTS</text>
+    <!-- 520+ -->
+    <text x="180" y="32" font-family="Italiana, Georgia, serif" font-size="38" fill="#F0D58A" letter-spacing="0.76">520+</text>
+    <text x="180" y="55" font-family="DM Sans, system-ui, sans-serif" font-size="9" fill="#fff" fill-opacity="0.45" letter-spacing="2.88" font-weight="500">BRANDS</text>
+    <!-- #1 -->
+    <text x="360" y="32" font-family="Italiana, Georgia, serif" font-size="38" fill="#F0D58A" letter-spacing="0.76">#1</text>
+    <text x="360" y="55" font-family="DM Sans, system-ui, sans-serif" font-size="9" fill="#fff" fill-opacity="0.45" letter-spacing="2.88" font-weight="500">US DESTINATION</text>
+  </g>
+
+  <!-- CTA button (bottom-right, angled cut corners like the real deck) -->
+  <g transform="translate(880,540)">
+    <polygon points="8,0 240,0 232,52 0,52" fill="url(#ctaGold)"/>
+    <text x="120" y="32" text-anchor="middle" font-family="DM Sans, system-ui, sans-serif" font-size="12" fill="#050505" letter-spacing="2.16" font-weight="500">EXPLORE THE DECK  →</text>
+  </g>
+
+</svg>

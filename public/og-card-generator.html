@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>OG Card Generator — 1200×630</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@1,300&family=DM+Sans:wght@500&family=Italiana&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #1a1a1a;
+    font-family: 'DM Sans', sans-serif;
+    overflow: hidden;
+  }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .instructions {
+    color: #888;
+    font-size: 13px;
+    text-align: center;
+    max-width: 1200px;
+    line-height: 1.6;
+  }
+  .instructions strong { color: #C9A84C; }
+  .instructions code {
+    background: #000;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #C9A84C;
+    font-family: monospace;
+  }
+  /* THE CARD ----------- exactly 1200 × 630 ----------- */
+  .card {
+    width: 1200px;
+    height: 630px;
+    position: relative;
+    overflow: hidden;
+    background: #050505;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+  }
+  /* poster bg */
+  .card .bg {
+    position: absolute; inset: 0;
+    background-image: url('/hero-poster.webp');
+    background-size: cover;
+    background-position: center;
+    filter: saturate(0.92) contrast(1.08) brightness(0.55);
+  }
+  /* gradient + grain overlays */
+  .card .grad {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(115deg, rgba(8,7,10,0.92) 0%, rgba(8,7,10,0.65) 40%, rgba(8,7,10,0.2) 65%, rgba(8,7,10,0.85) 100%),
+      radial-gradient(circle at 88% 18%, rgba(201,168,76,0.18) 0%, transparent 45%);
+  }
+  .card .vignette {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.55) 100%);
+  }
+  /* hairline frame */
+  .card .frame {
+    position: absolute;
+    inset: 28px;
+    border: 1px solid rgba(201,168,76,0.22);
+    pointer-events: none;
+  }
+  /* content layout ---- */
+  .card .content {
+    position: absolute;
+    inset: 70px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+  }
+  /* TOP row: brand + live badge */
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .brand img {
+    width: 38px; height: 38px;
+    filter: drop-shadow(0 0 14px rgba(201,168,76,0.35));
+  }
+  .brand .wordmark {
+    font-family: 'Italiana', serif;
+    font-size: 22px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: white;
+  }
+  .live-chip {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 14px;
+    background: rgba(8,8,8,0.55);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(201,168,76,0.28);
+  }
+  .live-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #3CD56F;
+    box-shadow: 0 0 12px rgba(60,213,111,0.6);
+  }
+  .live-chip .label {
+    font-size: 9px; letter-spacing: 0.32em;
+    color: rgba(255,255,255,0.55);
+    text-transform: uppercase;
+  }
+  .live-chip .num {
+    font-family: 'Italiana', serif;
+    font-size: 16px;
+    color: #F0D58A;
+  }
+
+  /* MIDDLE: kicker + headline + caption */
+  .kicker {
+    display: inline-flex; align-items: center; gap: 14px;
+    margin-bottom: 24px;
+  }
+  .kicker .rule {
+    width: 56px; height: 1px; background: #C9A84C;
+  }
+  .kicker .text {
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: #C9A84C;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 92px;
+    line-height: 0.92;
+    letter-spacing: 0.005em;
+    color: white;
+    margin-bottom: 22px;
+  }
+  .headline .gilded {
+    background: linear-gradient(135deg, #F0D58A 0%, #C9A84C 50%, #8B6914 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .caption {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 24px;
+    color: rgba(255,255,255,0.78);
+    border-left: 1px solid rgba(201,168,76,0.5);
+    padding-left: 18px;
+    max-width: 720px;
+    line-height: 1.45;
+  }
+
+  /* BOTTOM: stat row + CTA */
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+  }
+  .stats {
+    display: flex; gap: 56px;
+  }
+  .stat .num {
+    font-family: 'Italiana', serif;
+    font-size: 38px;
+    color: #F0D58A;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat .lbl {
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+  }
+  .cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: linear-gradient(135deg, #C9A84C, #8B6914);
+    color: #050505;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 18px 32px;
+    clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  }
+</style>
+</head>
+<body>
+
+<div class="instructions">
+  <strong>OG Card Generator</strong> — Open Chrome DevTools (F12) → toggle device toolbar (Ctrl+Shift+M) → set Responsive size to <code>1200 × 630</code>. Then DevTools menu (⋮) → <strong>Capture screenshot</strong>.
+  Save as <code>public/og-card.jpg</code> (export as JPG at 85% quality, ~150–250 KB).
+</div>
+
+<div class="card" id="og-card">
+  <div class="bg"></div>
+  <div class="grad"></div>
+  <div class="vignette"></div>
+  <div class="frame"></div>
+
+  <div class="content">
+
+    <!-- TOP -->
+    <div class="top">
+      <div class="brand">
+        <img src="/moa%20logo.svg" alt="" />
+        <div class="wordmark">Mall of America</div>
+      </div>
+      <div class="live-chip">
+        <span class="live-dot"></span>
+        <span class="label">Live · Today</span>
+        <span class="num">47,283</span>
+        <span class="label">Guests</span>
+      </div>
+    </div>
+
+    <!-- MIDDLE -->
+    <div class="middle">
+      <div class="kicker">
+        <div class="rule"></div>
+        <div class="text">Interactive Sales Deck · Bloomington, MN</div>
+      </div>
+      <div class="headline">
+        WHERE AMERICA SHOPS,<br />
+        PLAYS, AND <span class="gilded">GATHERS.</span>
+      </div>
+      <div class="caption">
+        The most visited destination in America. Forty million guests. One extraordinary address.
+      </div>
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="bottom">
+      <div class="stats">
+        <div class="stat"><div class="num">40M</div><div class="lbl">Annual Guests</div></div>
+        <div class="stat"><div class="num">520+</div><div class="lbl">Brands</div></div>
+        <div class="stat"><div class="num">#1</div><div class="lbl">US Destination</div></div>
+      </div>
+      <div class="cta">Explore the Deck →</div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
