@@ -62,7 +62,7 @@ Between chapters: **ImageInterlude** and **VideoInterlude** components provide c
 ## Setup
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/moa-deck
+git clone https://github.com/sahil04sharma/MallofAmerica.git
 cd moa-deck
 npm install
 npm run dev       # development at http://localhost:5173
