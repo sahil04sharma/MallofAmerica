@@ -175,6 +175,8 @@ export default function Navigation({ activeSection }) {
           <button
             className="md:hidden flex flex-col gap-1.5 p-2"
             onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
             style={{ background: 'none', border: 'none' }}
           >
             {[0, 1, 2].map(i => (
@@ -209,6 +211,8 @@ export default function Navigation({ activeSection }) {
               onClick={() => scrollTo(s.id)}
               onMouseEnter={() => setHovered(s.id)}
               onMouseLeave={() => setHovered(null)}
+              aria-label={`Chapter ${s.num} — ${s.label}`}
+              aria-current={isActive ? 'true' : undefined}
               className="flex items-center gap-4 group"
               style={{
                 background: 'none',

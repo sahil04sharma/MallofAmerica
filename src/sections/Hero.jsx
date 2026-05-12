@@ -5,14 +5,28 @@ import { motion } from 'framer-motion';
 // Poster is always rendered as the base layer (works offline / before video loads).
 // Local MP4 plays on top once ready — if it fails, poster shows through cleanly.
 const HERO_VIDEO  = '/hero.mp4';
-const HERO_POSTER = '/hero-poster.jpg';
+const HERO_POSTER = '/hero-poster.webp';
 
 const ease = [0.22, 1, 0.36, 1];
+
+// Live "Visitors today" baseline.
+// 40M annual guests ÷ 365 days ≈ ~110K/day. Calculate elapsed share of today.
+function todayVisitorBaseline() {
+  const now = new Date();
+  const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0, 0); // mall opens ~10am
+  const endOfDay   = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 21, 30, 0); // closes ~9:30pm
+  const dailyTarget = 110000;
+  if (now < startOfDay) return Math.floor(dailyTarget * 0.04);
+  if (now > endOfDay)   return dailyTarget;
+  const progress = (now - startOfDay) / (endOfDay - startOfDay);
+  return Math.floor(dailyTarget * progress);
+}
 
 export default function Hero() {
   const [videoReady, setVideoReady] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [isOnline, setIsOnline] = useState(typeof navigator !== 'undefined' ? navigator.onLine : true);
+  const [liveCount, setLiveCount] = useState(todayVisitorBaseline);
 
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 200);
@@ -26,6 +40,18 @@ export default function Hero() {
       window.removeEventListener('offline', off);
     };
   }, []);
+
+  // Live visitor ticker — increments every 700–1500ms for organic feel
+  useEffect(() => {
+    if (!loaded) return;
+    let timeout;
+    const tick = () => {
+      setLiveCount(c => c + Math.floor(Math.random() * 3) + 1);
+      timeout = setTimeout(tick, 700 + Math.random() * 800);
+    };
+    timeout = setTimeout(tick, 1200);
+    return () => clearTimeout(timeout);
+  }, [loaded]);
 
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
@@ -92,6 +118,63 @@ export default function Hero() {
         }}
       />
       <div className="grain" />
+
+      {/* Live visitor ticker — signature cinematic data moment, top-right */}
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={loaded ? { opacity: 1, y: 0 } : {}}
+        transition={{ delay: 2.4, duration: 1.2, ease }}
+        className="hidden lg:flex absolute items-center gap-3"
+        style={{
+          top: 'clamp(5.5rem, 8vh, 7rem)',
+          right: 'clamp(1.5rem, 3vw, 2.25rem)',
+          padding: '0.7rem 1rem',
+          background: 'rgba(8,8,8,0.55)',
+          backdropFilter: 'blur(14px) saturate(140%)',
+          WebkitBackdropFilter: 'blur(14px) saturate(140%)',
+          border: '1px solid rgba(201,168,76,0.22)',
+          zIndex: 5,
+        }}
+      >
+        <span
+          aria-hidden
+          style={{
+            width: 6, height: 6, borderRadius: '50%',
+            background: '#3CD56F',
+            boxShadow: '0 0 0 0 rgba(60, 213, 111, 0.6)',
+            animation: 'pulse-gold 2.4s ease-in-out infinite',
+          }}
+        />
+        <span style={{
+          fontSize: '0.55rem',
+          letterSpacing: '0.32em',
+          color: 'rgba(255,255,255,0.55)',
+          textTransform: 'uppercase',
+        }}>
+          Live · Today
+        </span>
+        <span style={{ width: 1, height: 12, background: 'rgba(201,168,76,0.3)' }} />
+        <span
+          aria-live="polite"
+          style={{
+            fontFamily: 'Italiana, serif',
+            fontSize: '1rem',
+            color: 'var(--gold-light)',
+            letterSpacing: '0.04em',
+            fontVariantNumeric: 'tabular-nums',
+          }}
+        >
+          {liveCount.toLocaleString('en-US')}
+        </span>
+        <span style={{
+          fontSize: '0.55rem',
+          letterSpacing: '0.28em',
+          color: 'rgba(255,255,255,0.45)',
+          textTransform: 'uppercase',
+        }}>
+          Guests
+        </span>
+      </motion.div>
 
       {/* Content — anchored bottom-left, editorial spread ---------------------- */}
       <div className="absolute inset-0 flex flex-col justify-end pb-20 md:pb-24 px-8 md:px-16 lg:px-28">

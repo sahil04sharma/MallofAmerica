@@ -22,9 +22,9 @@ const sectionIds = ['hero', 'why', 'retail', 'luxury', 'dining', 'entertainment'
  * with curated Unsplash placeholders as fallback for the rest.
  * See /prompts/AI-PROMPTS.md for the full prompt manifest. */
 const INTERLUDES = {
-  scale:        '/mutlistory%20interior.jpeg',                                                                    // AI-generated (Nano Banana)
+  scale:        '/mutlistory%20interior.webp',                                                                     // AI-generated (Nano Banana) · WebP-compressed
   luxuryWing:   'https://images.unsplash.com/photo-1481437156560-3205f6a55735?w=2400&q=80&auto=format&fit=crop',  // placeholder
-  dining:       '/dinning.jpeg',                                                                                  // AI-generated (Nano Banana)
+  dining:       '/dinning.webp',                                                                                   // AI-generated (Nano Banana) · WebP-compressed
   attractions:  'https://images.unsplash.com/photo-1517495306984-f84210f9daa8?w=2400&q=80&auto=format&fit=crop',  // placeholder (used as video poster)
   events:       'https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w=2400&q=80&auto=format&fit=crop',  // placeholder (used as video poster)
 };
@@ -100,6 +100,48 @@ export default function App() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  /* ----- Keyboard navigation — sales reps can drive with arrow keys ----- */
+  useEffect(() => {
+    const goToChapter = (idx) => {
+      const id = sectionIds[Math.max(0, Math.min(sectionIds.length - 1, idx))];
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    };
+    const onKey = (e) => {
+      // Don't hijack typing in inputs / textareas
+      const tag = (e.target?.tagName || '').toLowerCase();
+      if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+      const idx = sectionIds.indexOf(activeSection);
+      switch (e.key) {
+        case 'ArrowDown':
+        case 'ArrowRight':
+        case 'PageDown':
+        case ' ': // Space
+          e.preventDefault();
+          goToChapter(idx + 1);
+          break;
+        case 'ArrowUp':
+        case 'ArrowLeft':
+        case 'PageUp':
+          e.preventDefault();
+          goToChapter(idx - 1);
+          break;
+        case 'Home':
+          e.preventDefault();
+          goToChapter(0);
+          break;
+        case 'End':
+          e.preventDefault();
+          goToChapter(sectionIds.length - 1);
+          break;
+        default:
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [activeSection]);
 
   return (
     <>

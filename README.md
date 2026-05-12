@@ -1,9 +1,12 @@
 # Mall of America — Interactive Commercial Sales Deck
 
+> 🔗 **Live:** [mallof-america.vercel.app](https://mallof-america.vercel.app) &nbsp;·&nbsp; 📦 **Repo:** [github.com/sahil04sharma/MallofAmerica](https://github.com/sahil04sharma/MallofAmerica)
+
 A cinematic, fully interactive browser-based sales presentation for Mall of America's commercial team. Designed to feel less like a website and more like a curated keynote — editorial typography, cinematic media, and a non-linear chapter system inspired by Digideck and Apple keynotes.
 
 **Built for:** Prospective retail tenants, luxury maisons, brand sponsors, and event partners
-**Deploy:** Vercel / Netlify / any static host
+**Stack:** React 19 · Vite 8 · Framer Motion 12 · Tailwind CSS v4
+**Deploy target:** Vercel (live) — also runs on Netlify / any static host
 
 ---
 
@@ -73,14 +76,14 @@ npm run lint      # ESLint
 
 ### Required assets in `/public`
 
-| File | Purpose |
-|---|---|
-| `hero.mp4` | Cinematic hero background (H.264 + AAC, ~1080p, recommended ≤15 MB) |
-| `hero-poster.jpg` | Hero poster — shown before video decodes & if video fails |
-| `moa logo.svg` | Brand mark used by FloatingLogo, navbar, footer |
-| `dinning.jpeg` | Dining interlude image |
-| `mutlistory interior.jpeg` | Interior interlude image |
-| `videos/nicklodean.mp4` | Nickelodeon Universe drone clip (Attractions interlude) |
+| File | Size | Purpose |
+|---|---|---|
+| `hero.mp4` | ~9.5 MB | Cinematic hero background (H.264 + AAC, ~1080p) — compressed for fast first-paint |
+| `hero-poster.webp` | ~500 KB | Hero poster — shown before video decodes & if video fails |
+| `moa logo.svg` | — | Brand mark used by FloatingLogo, navbar, footer |
+| `dinning.webp` | ~720 KB | Dining interlude image (AI-generated, WebP-compressed) |
+| `mutlistory interior.webp` | ~370 KB | Interior interlude image (AI-generated, WebP-compressed) |
+| `videos/nicklodean.mp4` | — | Nickelodeon Universe drone clip (Attractions interlude) |
 
 ### Deploy to Vercel
 
@@ -93,6 +96,19 @@ Or import the repo at vercel.com — zero config needed.
 ### Deploy to Netlify
 
 Drag the `/dist` folder to netlify.com/drop after `npm run build`.
+
+---
+
+## Keyboard Shortcuts
+
+For sales reps presenting on a call:
+
+| Key | Action |
+|---|---|
+| `↓` / `→` / `Space` | Advance to next chapter |
+| `↑` / `←` | Previous chapter |
+| `Home` | Jump to Hero |
+| `End` | Jump to Partnership |
 
 ---
 
